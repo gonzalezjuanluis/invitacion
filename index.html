@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Invitación 70 Años | María Salazar Romero</title>
+    <!-- Fuentes elegantes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- SheetJS para exportar a Excel -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
+    <i class="fas fa-moon"></i>
+</button>
+
+<div class="invitation-card">
+    <div class="hero-image">
+        <img src="https://images.pexels.com/photos/7074091/pexels-photo-7074091.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Celebración 70 años">
+        <div class="image-overlay">
+            <h2>Invitación Especial</h2>
+            <p class="overlay-date">9 de Mayo, 2025</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="title-section">
+            <h1>Celebrando una vida llena de amor, historia y bendiciones<br>María Salazar Romero</h1>
+            <div class="age-badge"><i class="fas fa-star-of-life"></i> 70 años de vida y bendiciones <i class="fas fa-star-of-life"></i></div>
+        </div>
+
+        <!-- CUENTA REGRESIVA -->
+        <div class="countdown-section">
+            <h3><i class="fas fa-hourglass-half"></i> Faltan para este momento especial</h3>
+            <div class="countdown-timer">
+                <div class="countdown-item"><span id="days">00</span><span>Días</span></div>
+                <div class="countdown-item"><span id="hours">00</span><span>Horas</span></div>
+                <div class="countdown-item"><span id="minutes">00</span><span>Minutos</span></div>
+                <div class="countdown-item"><span id="seconds">00</span><span>Segundos</span></div>
+            </div>
+        </div>
+
+        <div class="event-details">
+            <div class="detail-item"><i class="fas fa-calendar-alt"></i> <span>Viernes 9 de Mayo, 2026</span></div>
+            <div class="detail-item"><i class="fas fa-clock"></i> <span>4:00 PM - 12:00 AM</span></div>
+            <div class="detail-item"><i class="fas fa-map-marker-alt"></i> <span>Mimbrenos 18, Pedregal Sta Úrsula Xitla, Tlalpan, Ciudad de México</span></div>
+            <div class="detail-item"><i class="fas fa-music"></i> <span>Música en vivo & Cena</span></div>
+        </div>
+
+        <div class="address-section">
+            <div class="address-card">
+                <i class="fas fa-location-dot"></i>
+                <div class="address-text">
+                    <h4>📍 Ubicación del evento</h4>
+                    <p>Mimbrenos 18, Pedregal Sta Úrsula Xitla, Tlalpan</p>
+                    <p>Tlalpan, 14438 Ciudad de México, CDMX</p>
+                    <a href="https://www.google.com/maps/place/Mimbrenos+18,+Pedregal+Sta+%C3%9Arsula+Xitla,+Tlalpan,+14438+Ciudad+de+M%C3%A9xico,+CDMX/@19.2725305,-99.1834066,17z/data=!3m1!4b1!4m6!3m5!1s0x85ce009a2512c0b3:0x473199ecc015e795!8m2!3d19.2725305!4d-99.1808317!16s%2Fg%2F11c4m6vyxy" target="_blank" class="address-link">
+                        <i class="fas fa-external-link-alt"></i> Ver en Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="message">"La vida se celebra con los momentos que compartimos. Te invitamos a ser parte de esta ocasión tan especial. Confirma tu asistencia y acompáñanos a disfrutar una velada inolvidable."</div>
+
+        <div class="rsvp-form">
+            <h3><i class="fas fa-envelope-open-text"></i> ¿Nos acompañas?</h3>
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Nombre completo</label>
+                <input type="text" id="nombreAsistente" placeholder="Ej: María Rodríguez López" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-users"></i> Número de acompañantes</label>
+                <select id="acompanantes">
+                    <option value="0">Solo yo</option>
+                    <option value="1">1 acompañante</option>
+                    <option value="2">2 acompañantes</option>
+                    <option value="3">3 acompañantes</option>
+                    <option value="4">4 acompañantes</option>
+                    <option value="5">5 acompañantes</option>
+                </select>
+            </div>
+            
+            <!-- UN SOLO BOTÓN - GUARDA DIRECTAMENTE EN GOOGLE SHEETS -->
+            <button class="btn-asistir" id="btnAsistir" style="background: #0f9d58;">
+                <i class="fas fa-cloud-upload-alt"></i> Confirmar asistencia ☁️
+            </button>
+            
+            <p class="form-note"><i class="fas fa-lock"></i> Por favor confirma tu asistencia antes del 2 de mayo.</p>
+        </div>
+
+        <footer>
+            <i class="fas fa-glass-cheers"></i> Organizado con cariño Esperamos contar con tu presencia
+        </footer>
+    </div>
+</div>
+
+<div class="music-control">
+    <button id="toggleMusic" class="music-btn">
+        <i class="fas fa-music"></i>
+        <i class="fas fa-volume-mute" style="display: none;"></i>
+    </button>
+</div>
+
+<audio id="backgroundMusic" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div id="toastMessage" class="toast-msg"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

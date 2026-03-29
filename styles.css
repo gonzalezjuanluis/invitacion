@@ -1,0 +1,490 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables para tema claro/oscuro */
+:root {
+    --bg-gradient-start: #f5f0e6;
+    --bg-gradient-end: #e8dfd1;
+    --card-bg: #fffef7;
+    --text-primary: #3e2a21;
+    --text-secondary: #4a3724;
+    --border-color: #e7cba5;
+    --detail-bg: #faf7f0;
+    --input-bg: #fffcf5;
+    --input-border: #e2d4be;
+    --accent-gold: #b8864b;
+    --accent-gold-hover: #9b6a3c;
+    --shadow: rgba(0,0,0,0.1);
+    --success: #2c6e2c;
+}
+
+body.dark {
+    --bg-gradient-start: #1a1a2e;
+    --bg-gradient-end: #16213e;
+    --card-bg: #1e1e2f;
+    --text-primary: #e8e8e8;
+    --text-secondary: #d4d4d4;
+    --border-color: #4a4a6a;
+    --detail-bg: #2a2a3c;
+    --input-bg: #2d2d3f;
+    --input-border: #4a4a6a;
+    --accent-gold: #d4af7a;
+    --accent-gold-hover: #c4a15e;
+    --shadow: rgba(0,0,0,0.3);
+    --success: #4c9e4c;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    font-family: 'Montserrat', sans-serif;
+    padding: 2rem 1.5rem;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--accent-gold);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    transition: all 0.3s;
+    box-shadow: 0 2px 10px var(--shadow);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+.invitation-card {
+    max-width: 900px;
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 25px 45px -12px rgba(0,0,0,0.35);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.invitation-card:hover {
+    transform: scale(1.01);
+}
+
+.hero-image {
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+    background: #c2a575;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.invitation-card:hover .hero-image img {
+    transform: scale(1.02);
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+}
+
+.image-overlay h2 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+
+.overlay-date {
+    color: #ffd966;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.content {
+    padding: 2rem 2.5rem;
+}
+
+.title-section {
+    text-align: center;
+    margin-bottom: 1.8rem;
+    border-bottom: 2px solid var(--border-color);
+    display: inline-block;
+    width: 100%;
+}
+
+.title-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+
+.age-badge {
+    background: var(--accent-gold);
+    color: #2c221b;
+    display: inline-block;
+    padding: 0.3rem 1.2rem;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.countdown-section {
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--detail-bg);
+    border-radius: 1.5rem;
+}
+
+.countdown-section h3 {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    text-align: center;
+    background: var(--card-bg);
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    min-width: 80px;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.countdown-item span:first-child {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    font-family: 'Playfair Display', serif;
+}
+
+.countdown-item span:last-child {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+    display: block;
+}
+
+.event-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    background: var(--detail-bg);
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: var(--card-bg);
+    padding: 0.6rem 1.2rem;
+    border-radius: 60px;
+}
+
+.detail-item i {
+    font-size: 1.2rem;
+    color: var(--accent-gold);
+}
+
+.address-section {
+    margin: 1.5rem 0;
+}
+
+.address-card {
+    background: var(--detail-bg);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    border-left: 4px solid var(--accent-gold);
+}
+
+.address-card i {
+    font-size: 2rem;
+    color: var(--accent-gold);
+}
+
+.address-text h4 {
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.address-text p {
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.address-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.address-link:hover {
+    text-decoration: underline;
+}
+
+.message {
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin: 1.5rem 0;
+    font-style: italic;
+    background: var(--detail-bg);
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+.rsvp-form {
+    background: var(--card-bg);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+}
+
+.rsvp-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+    margin-bottom: 1.2rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(184, 134, 75, 0.2);
+}
+
+.btn-asistir {
+    background: var(--accent-gold);
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.btn-asistir:hover {
+    background: var(--accent-gold-hover);
+    transform: translateY(-2px);
+}
+
+.form-note {
+    font-size: 0.7rem;
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 0.8rem;
+}
+
+.share-section {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.share-section h3 {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.share-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.whatsapp { background: #25D366; color: white; }
+.whatsapp:hover { background: #128C7E; transform: translateY(-2px); }
+.facebook { background: #1877F2; color: white; }
+.facebook:hover { background: #0e5fc7; transform: translateY(-2px); }
+.email { background: #6c757d; color: white; }
+.email:hover { background: #5a6268; transform: translateY(-2px); }
+.copy { background: var(--accent-gold); color: white; }
+.copy:hover { background: var(--accent-gold-hover); transform: translateY(-2px); }
+
+footer {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    padding: 1rem 2rem 1rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 1rem;
+}
+
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.music-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 10px var(--shadow);
+    transition: all 0.3s;
+}
+
+.music-btn:hover {
+    transform: scale(1.05);
+}
+
+.toast-msg {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent-gold);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 500;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 700px) {
+    .content {
+        padding: 1.5rem;
+    }
+    .title-section h1 {
+        font-size: 2rem;
+    }
+    .hero-image {
+        height: 280px;
+    }
+    .countdown-item span:first-child {
+        font-size: 1.5rem;
+    }
+    .countdown-item {
+        min-width: 65px;
+    }
+    .countdown-timer {
+        gap: 0.8rem;
+    }
+    .detail-item {
+        font-size: 0.75rem;
+        padding: 0.4rem 1rem;
+    }
+    .address-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .address-card i {
+        margin: 0 auto;
+    }
+}

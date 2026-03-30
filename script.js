@@ -128,12 +128,14 @@ function confirmarAsistencia(nombre, acompanantes) {
     const totalPersonas = 1 + acompanantesNum;
     const fechaActual = new Date().toLocaleString('es-ES');
     
-    mostrarToast("☁️ Guardando ()...", "#0f9d58");
+    mostrarToast("☁️ Guardando...", "#0f9d58");
     
     guardarEnGoogleSheets(nombreLimpio, acompanantesNum, totalPersonas, fechaActual)
         .then(exito => {
             if (exito) {
-                mostrarToast(`✨ ¡Gracias ${nombreLimpio}! Confirmado para ${totalPersonas} persona(s) ✨`, "#0f9d58");
+                // ✅ ESTO ES LO NUEVO - MODAL GRANDE
+                mostrarModalConfirmacion(nombreLimpio, totalPersonas);
+                mostrarToast(`✨ ¡Gracias ${nombreLimpio}!`, "#0f9d58");
             } else {
                 mostrarToast(`❌ Error al guardar. Por favor intenta de nuevo.`, "#b87333");
             }

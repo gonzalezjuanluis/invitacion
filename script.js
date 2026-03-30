@@ -7,7 +7,7 @@ function mostrarModalConfirmacion(nombre, totalPersonas) {
     const mensaje = document.getElementById('modalMensaje');
     
     if (modal && mensaje) {
-        mensaje.innerHTML = `${nombre}🎉 ¡Te esperamos! 🎉`;
+        mensaje.innerHTML = `¡Te esperamos! 🎉`;
         modal.style.display = 'flex';
         
         // Cerrar modal al hacer clic en el botón

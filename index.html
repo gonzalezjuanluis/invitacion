@@ -91,5 +91,24 @@
 <div id="toastMessage" class="toast-msg"></div>
 
 <script src="script.js"></script>
+    <!-- MODAL DE CONFIRMACIÓN - BLOQUE AGREGADO -->
+<div id="modalConfirmacion" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center;">
+    <div style="background: white; border-radius: 25px; padding: 2rem; text-align: center; max-width: 90%; width: 320px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
+        <h2 style="color: #2c6e2c; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">¡Confirmación Exitosa!</h2>
+        <p id="modalMensaje" style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.4;"></p>
+        <button id="cerrarModal" style="background: #2c6e2c; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-size: 1rem; font-weight: bold; cursor: pointer;">Aceptar</button>
+    </div>
+</div>
+
+<style>
+    body.dark #modalConfirmacion > div {
+        background: #1e1e2f;
+        color: white;
+    }
+    body.dark #modalConfirmacion h2 {
+        color: #4c9e4c;
+    }
+</style>
 </body>
 </html>

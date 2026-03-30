@@ -1,7 +1,40 @@
 // ==================== VARIABLES GLOBALES ====================
 let musicPlaying = false;
 let countdownInterval;
+// ==================== BLOQUE MODAL DE CONFIRMACIÓN ====================
+function mostrarModalConfirmacion(nombre, totalPersonas) {
+    const modal = document.getElementById('modalConfirmacion');
+    const mensaje = document.getElementById('modalMensaje');
+    
+    if (modal && mensaje) {
+        mensaje.innerHTML = `${nombre}<br><br>Has confirmado para <strong>${totalPersonas}</strong> persona(s)<br><br>🎉 ¡Te esperamos! 🎉`;
+        modal.style.display = 'flex';
+        
+        // Cerrar modal al hacer clic en el botón
+        const cerrarBtn = document.getElementById('cerrarModal');
+        if (cerrarBtn) {
+            cerrarBtn.onclick = function() {
+                modal.style.display = 'none';
+            };
+        }
+        
+        // Cerrar modal al hacer clic fuera
+        modal.onclick = function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    }
+}
 
+// ==================== MODIFICAR TU FUNCIÓN confirmarAsistencia ====================
+// Busca tu función "confirmarAsistencia" y REEMPLAZA la parte donde muestra el mensaje de éxito
+// Cambia esta línea:
+// mostrarToast(`✨ ¡Gracias ${nombreLimpio}! Confirmado para ${totalPersonas} persona(s) ✨`, "#0f9d58");
+// Por ESTAS líneas:
+
+// mostrarModalConfirmacion(nombreLimpio, totalPersonas);
+// mostrarToast(`✨ ¡Gracias ${nombreLimpio}!`, "#0f9d58");
 // ==================== CONEXIÓN CON GOOGLE SHEETS ====================
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyy3kIa7Sl-lL5RJt2o7C7QgxEtYGD1IsJE_R8xJuUFEaiDWwotLcLRsuh_UsQTdDb-BQ/exec';
 

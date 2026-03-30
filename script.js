@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Mensaje de bienvenida
     setTimeout(() => {
-        mostrarToast("🎉 ¡Bienvenido! Confirma tu asistencia - Se guardará en Google Sheets ☁️", "#0f9d58");
+        mostrarToast("🎉 ¡Bienvenido! Confirma tu asistencia", "#0f9d58");
     }, 800);
     
     console.log("%c☁️ TODOS LOS DATOS SE GUARDAN DIRECTAMENTE EN GOOGLE SHEETS", "color: #0f9d58; font-size: 14px; font-weight: bold;");

@@ -34,7 +34,7 @@ async function guardarEnGoogleSheets(nombre, acompanantes, totalPersonas, fecha)
 
 // ==================== CONTADOR ====================
 function iniciarContador() {
-    const fechaEvento = new Date(2026, 4, 9, 16, 0, 0);
+    const fechaEvento = new Date(2025, 4, 9, 16, 0, 0);
 
     console.log("=== CONTADOR INICIADO ===");
     console.log("Fecha del evento: " + fechaEvento.toLocaleString());
@@ -83,6 +83,119 @@ function iniciarContador() {
     countdownInterval = setInterval(actualizarContador, 1000);
 }
 
+// ==================== MOSTRAR MODAL DE CONFIRMACIÓN (VISIBLE Y GRANDE) ====================
+function mostrarModalConfirmacion(nombre, totalPersonas) {
+    // Crear el modal si no existe
+    let modal = document.getElementById('modalConfirmacion');
+    
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'modalConfirmacion';
+        modal.className = 'modal-confirmacion';
+        modal.innerHTML = `
+            <div class="modal-confirmacion-contenido">
+                <div class="modal-icono">✅</div>
+                <h2>¡Confirmación Exitosa!</h2>
+                <p id="modalMensaje"></p>
+                <button class="modal-boton" id="cerrarModal">Aceptar</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        // Agregar estilos al modal
+        const estiloModal = document.createElement('style');
+        estiloModal.textContent = `
+            .modal-confirmacion {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.8);
+                z-index: 10000;
+                justify-content: center;
+                align-items: center;
+                animation: fadeIn 0.3s ease;
+            }
+            .modal-confirmacion-contenido {
+                background: white;
+                border-radius: 20px;
+                padding: 2rem;
+                text-align: center;
+                max-width: 90%;
+                width: 320px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                animation: slideUp 0.3s ease;
+            }
+            body.dark .modal-confirmacion-contenido {
+                background: #1e1e2f;
+                color: white;
+            }
+            .modal-icono {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+            }
+            .modal-confirmacion-contenido h2 {
+                color: #2c6e2c;
+                margin-bottom: 1rem;
+                font-family: 'Playfair Display', serif;
+            }
+            body.dark .modal-confirmacion-contenido h2 {
+                color: #4c9e4c;
+            }
+            .modal-confirmacion-contenido p {
+                margin-bottom: 1.5rem;
+                font-size: 1.1rem;
+                line-height: 1.4;
+            }
+            .modal-boton {
+                background: #2c6e2c;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 40px;
+                font-size: 1rem;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .modal-boton:hover {
+                background: #1f551f;
+                transform: scale(1.02);
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translateY(50px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(estiloModal);
+        
+        // Evento para cerrar modal
+        document.getElementById('cerrarModal').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        // Cerrar modal al hacer clic fuera
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+    
+    // Actualizar mensaje del modal
+    const mensaje = document.getElementById('modalMensaje');
+    mensaje.innerHTML = `${nombre}<br>Has confirmado para <strong>${totalPersonas}</strong> persona(s)<br><br>¡Te esperamos! 🎉`;
+    
+    // Mostrar modal
+    modal.style.display = 'flex';
+}
+
 // ==================== FUNCIÓN PRINCIPAL - GUARDA EN GOOGLE SHEETS ====================
 function confirmarAsistencia(nombre, acompanantes) {
     if (!nombre || nombre.trim() === "") {
@@ -95,12 +208,16 @@ function confirmarAsistencia(nombre, acompanantes) {
     const totalPersonas = 1 + acompanantesNum;
     const fechaActual = new Date().toLocaleString('es-ES');
     
-    mostrarToast("☁️ Guardando ()...", "#0f9d58");
+    // Mostrar mensaje de carga
+    mostrarToast("☁️ Guardando...", "#0f9d58");
     
     guardarEnGoogleSheets(nombreLimpio, acompanantesNum, totalPersonas, fechaActual)
         .then(exito => {
             if (exito) {
-                mostrarToast(`✨ ¡Gracias ${nombreLimpio}! Confirmado para ${totalPersonas} persona(s) ✨`, "#0f9d58");
+                // MOSTRAR MODAL GRANDE Y VISIBLE
+                mostrarModalConfirmacion(nombreLimpio, totalPersonas);
+                // También un toast pequeño por si acaso
+                mostrarToast(`✨ ¡Gracias ${nombreLimpio}!`, "#0f9d58");
             } else {
                 mostrarToast(`❌ Error al guardar. Por favor intenta de nuevo.`, "#b87333");
             }
@@ -189,7 +306,7 @@ function initTheme() {
     });
 }
 
-// ==================== TOAST ====================
+// ==================== TOAST PEQUEÑO (SOLO PARA CARGAS) ====================
 let toastTimeout;
 function mostrarToast(mensaje, colorFondo = "#b8864b") {
     const toast = document.getElementById('toastMessage');
@@ -200,7 +317,7 @@ function mostrarToast(mensaje, colorFondo = "#b8864b") {
     if (toastTimeout) clearTimeout(toastTimeout);
     toastTimeout = setTimeout(() => {
         toast.style.opacity = '0';
-    }, 3000);
+    }, 2000);
 }
 
 // ==================== INICIALIZACIÓN ====================
